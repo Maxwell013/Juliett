@@ -7,7 +7,7 @@ This library is part of a long term project that aims to build a small game engi
 
 ### Usage
 - [https://github.com/Maxwell013/Lima](https://github.com/Maxwell013/Lima)
-Build
+### Build
 - [https://github.com/Maxwell013/Bravo](https://github.com/Maxwell013/Bravo)
 
 ## Documentation
