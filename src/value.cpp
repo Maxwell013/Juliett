@@ -88,28 +88,21 @@ size_t JValue::length() const {
         return static_cast<JArray*>(data)->size();
     default:
         LOG_THROW("Cannot size JValue of type '", type, "'.");
+        return 0; // unreachable
     }
 }
 
 JValue* JValue::at(size_t index) {
-    if (type != JType::ARRAY) {
-        LOG_THROW("Cannot index JValue of type '", type, "' with 'size_t'.");
-    }
 
-    if (static_cast<JArray*>(data)->size() <= index) {
-        LOG_THROW("Index out of range (", index, ").");
-    }
+    LOG_ASSERT(type == JType::ARRAY, "Cannot index JValue of type '", type, "' with 'size_t'.");
+    LOG_ASSERT(static_cast<JArray*>(data)->size() > index, "Index out of range (", index, ").");
 
     return static_cast<JArray*>(data)->at(index);
 }
 
 JValue* JValue::at(JString key) {
-    if (type != JType::OBJECT) {
-        LOG_THROW("Cannot index JValue of type '", type, "' with 'std::string'.");
-    }
-
-    if (!static_cast<JObject*>(data)->contains(key))
-        return nullptr;
+    LOG_ASSERT(type == JType::OBJECT, "Cannot index JValue of type '", type, "' with 'std::string'.");
+    if (!static_cast<JObject*>(data)->contains(key)) return nullptr;
 
     return static_cast<JObject*>(data)->at(key);
 }

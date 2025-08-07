@@ -12,9 +12,7 @@ Parser::Parser(const std::filesystem::path &path) : _file(), _state(STATE_NONE),
 }
 
 void Parser::start() {
-    if (_state != STATE_OPEN) {
-        LOG_THROW("Failed to parse file : file not open.");
-    }
+    LOG_ASSERT(_state == STATE_OPEN, "Failed to parse file : file not open.");
 
     _state = STATE_PARSING;
     char token = get();
