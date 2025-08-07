@@ -86,10 +86,12 @@ size_t JValue::length() const {
         return static_cast<JObject*>(data)->size();
     case JType::ARRAY:
         return static_cast<JArray*>(data)->size();
+    case JType::STRING:
+        return static_cast<JString*>(data)->size();
     default:
         LOG_THROW("Cannot size JValue of type '", type, "'.");
-        return 0; // unreachable
     }
+    return 0; // unreachable
 }
 
 JValue* JValue::at(size_t index) {
